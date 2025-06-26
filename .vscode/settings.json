@@ -1,0 +1,17 @@
+{
+    "cSpell.words": [
+        "endfunction",
+        "endpackage",
+        "ILEN",
+        "memaddr",
+        "membus",
+        "modport",
+        "rdata",
+        "rvalid",
+        "svutil",
+        "Verilator",
+        "VERYL",
+        "wdata",
+        "XLEN"
+    ]
+}
