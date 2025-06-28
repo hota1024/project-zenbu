@@ -1,4 +1,5 @@
 /Users/hotaka/ghq/github.com/hota1024/zenbu/core/src/util.sv
+/Users/hotaka/ghq/github.com/hota1024/zenbu/core/src/fifo.sv
 /Users/hotaka/ghq/github.com/hota1024/zenbu/core/src/eei.sv
 /Users/hotaka/ghq/github.com/hota1024/zenbu/core/src/memory.sv
 /Users/hotaka/ghq/github.com/hota1024/zenbu/core/src/membus.sv

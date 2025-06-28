@@ -7,11 +7,14 @@
         "membus",
         "modport",
         "rdata",
+        "rready",
         "rvalid",
         "svutil",
         "Verilator",
         "VERYL",
         "wdata",
+        "wready",
+        "wvalid",
         "XLEN"
     ]
 }
