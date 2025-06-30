@@ -1,0 +1,24 @@
+import eei::*;
+
+package corectrl {
+    enum InstType: logic<6> {
+        X = 6'b000000,
+        R = 6'b000001,
+        I = 6'b000010,
+        S = 6'b000100,
+        B = 6'b001000,
+        U = 6'b010000,
+        J = 6'b100000,
+    }
+
+    struct InstCtrl {
+        itype   : InstType   , // Instruction type.
+        rwb_en  : logic      , // Whether register is writable.
+        is_lui  : logic      , // Whether is LUI instruction.
+        is_aluop: logic      , // Whether use ALU.
+        is_jump : logic      , // Whether is JUMP instruction.
+        is_load : logic      , //Whether is LOAD instruction.
+        funct3  : logic   <3>,
+        funct7  : logic   <7>,
+    }
+}

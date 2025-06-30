@@ -1,4 +1,5 @@
 import eei::*;
+import corectrl::*;
 
 module core (
     clk   : input   clock                          ,
@@ -25,6 +26,13 @@ module core (
 
     let if_pc_next: Addr = if_pc + 4; // Next program counter.
 
+    var regfile : UIntX<32>;
+    let rs1_addr: logic<5>  = inst_bits[19:15];
+    let rs2_addr: logic<5>  = inst_bits[24:20];
+
+    let rs1_data: UIntX = if rs1_addr == 0 { 0 } else { regfile[rs1_addr] };
+    let rs2_data: UIntX = if rs2_addr == 0 { 0 } else { regfile[rs2_addr] };
+
     inst if_fifo: fifo #(
         DATA_TYPE: if_fifo_type,
         WIDTH    : 3           ,
@@ -46,6 +54,15 @@ module core (
         membus.wdata = 'x; // Not write to memory.
 
         if_fifo_rready = 1;
+    }
+
+    always_ff {
+        if_reset {
+            // Initialize regfile.
+            for i: i32 in 0..32 {
+                regfile[i] = i;
+            }
+        }
     }
 
     always_ff {
@@ -83,12 +100,24 @@ module core (
         }
     }
 
-    let inst_pc  : Addr = if_fifo_rdata.addr;
-    let inst_bits: Inst = if_fifo_rdata.bits;
+    let inst_pc  : Addr     = if_fifo_rdata.addr;
+    let inst_bits: Inst     = if_fifo_rdata.bits;
+    var inst_ctrl: InstCtrl;
+    var inst_imm : UIntX   ;
+
+    inst decoder: inst_decoder (
+        bits: inst_bits,
+        ctrl: inst_ctrl,
+        imm : inst_imm ,
+    );
 
     always_ff {
         if if_fifo_rvalid {
             $display("%h : %h", inst_pc, inst_bits);
+            $display("  itype   : %b", inst_ctrl.itype);
+            $display("  imm     : %h", inst_imm);
+            $display("  rs1[%d] : %h", rs1_addr, rs1_data);
+            $display("  rs2[%d] : %h", rs2_addr, rs2_data);
         }
     }
 }

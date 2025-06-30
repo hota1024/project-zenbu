@@ -1,12 +1,15 @@
 {
     "cSpell.words": [
+        "corectrl",
         "endfunction",
         "endpackage",
         "ILEN",
+        "itype",
         "memaddr",
         "membus",
         "modport",
         "rdata",
+        "regfile",
         "rready",
         "rvalid",
         "svutil",
